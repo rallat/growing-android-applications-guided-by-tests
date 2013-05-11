@@ -6,6 +6,8 @@ import com.github.frankiesardo.gaagbt.presentation.Presentation;
 import com.github.frankiesardo.gaagbt.request.SearchRepositoriesRequest;
 import com.github.frankiesardo.gaagbt.response.SearchRepositoriesResponse;
 
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class SearchRepositoriesScenarioTest {
 
     static final String KEYWORD = "android";
-    static final Repositories ANDROID_REPOSITORIES = new Repositories();
+    static final Repositories ANDROID_REPOSITORIES = new Repositories(Collections.EMPTY_LIST);
 
     @Mock
     Presentation<SearchRepositoriesResponse> presentation;
