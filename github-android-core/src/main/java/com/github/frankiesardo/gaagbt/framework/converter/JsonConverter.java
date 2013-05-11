@@ -25,7 +25,17 @@ public class JsonConverter {
         module.addDeserializer(Repository.class, new RepositoryConverter());
     }
 
-    public <T> T readValue(Reader reader, Class<T> valueType) throws IOException {
-        return objectMapper.readValue(reader, valueType);
+    public <T> T readValue(Reader reader, Class<T> valueType) {
+        try {
+            return objectMapper.readValue(reader, valueType);
+        } catch (IOException e) {
+            throw new JsonConverterException(e);
+        }
+    }
+
+    public static class JsonConverterException extends RuntimeException {
+        public JsonConverterException(Exception cause) {
+            super(cause);
+        }
     }
 }

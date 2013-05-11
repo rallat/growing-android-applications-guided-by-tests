@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.CharBuffer;
 
-class ResourceReader extends Reader {
+public class ResourceReader extends Reader {
 
+    private final String fileName;
     private final InputStreamReader delegateReader;
 
     public ResourceReader(String fileName) {
+        this.fileName = fileName;
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
         delegateReader = new InputStreamReader(inputStream);
     }
@@ -53,5 +55,22 @@ class ResourceReader extends Reader {
     @Override
     public void close() throws IOException {
         delegateReader.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ResourceReader that = (ResourceReader) o;
+
+        if (!fileName.equals(that.fileName)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return fileName.hashCode();
     }
 }

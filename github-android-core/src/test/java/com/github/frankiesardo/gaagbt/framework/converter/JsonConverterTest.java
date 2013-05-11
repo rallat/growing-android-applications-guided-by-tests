@@ -9,31 +9,27 @@ import com.github.frankiesardo.gaagbt.entity.Repository;
 
 import java.io.Reader;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class JsonConverterTest {
 
     @Mock
     ObjectMapper objectMapper;
     @Mock
     SimpleModule module;
-
+    @InjectMocks
     JsonConverter jsonConverter;
-
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        jsonConverter = new JsonConverter(objectMapper, module);
-    }
 
     @Test
     public void ignoreUnknownFields() throws Exception {
@@ -53,10 +49,11 @@ public class JsonConverterTest {
 
     @Test
     public void delegateReadToObjectMapper() throws Exception {
-        Class<?> targetClass = JsonConverterTest.class;
-        Reader chosenReader = mock(Reader.class);
-        jsonConverter.readValue(chosenReader, targetClass);
+        Object expected = new Object();
+        when(objectMapper.readValue(any(Reader.class), eq(Object.class))).thenReturn(expected);
 
-        verify(objectMapper).readValue(same(chosenReader), same(targetClass));
+        Object actual = jsonConverter.readValue(mock(Reader.class), Object.class);
+
+        assertThat(actual).isSameAs(expected);
     }
 }

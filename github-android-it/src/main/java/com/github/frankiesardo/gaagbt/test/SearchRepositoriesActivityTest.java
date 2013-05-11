@@ -4,19 +4,13 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.github.frankiesardo.gaagbt.R;
 import com.github.frankiesardo.gaagbt.SearchRepositoriesActivity;
+import com.github.frankiesardo.gaagbt.entity.Repository;
 import com.jayway.android.robotium.solo.Solo;
 
-public class SearchRepositoriesActivityTest extends ActivityInstrumentationTestCase2<SearchRepositoriesActivity> {
+import static com.github.frankiesardo.gaagbt.boundary.mock.MockSearchRepositories.ANDROID_KEYWORD;
+import static com.github.frankiesardo.gaagbt.boundary.mock.MockSearchRepositories.ANDROID_REPOSITORIES;
 
-    private static final String KEYWORD = "android";
-    private static final String[] ANDROID_REPOSITORIES = {
-            "GitHub Android App",
-            "Examples of Android applications",
-            "Facebook SDK for Android",
-            "Android Action Bar Implementation",
-            "A horizontal view scroller library for Android",
-            "An Asynchronous HTTP Library for Android"
-    };
+public class SearchRepositoriesActivityTest extends ActivityInstrumentationTestCase2<SearchRepositoriesActivity> {
 
     Solo solo;
 
@@ -32,10 +26,10 @@ public class SearchRepositoriesActivityTest extends ActivityInstrumentationTestC
 
     public void testDisplayRepositoriesDescription() throws Exception {
         solo.clickOnActionBarItem(R.id.menu_search);
-        solo.enterText(0, KEYWORD);
+        solo.enterText(0, ANDROID_KEYWORD);
         solo.sendKey(Solo.ENTER);
-        for (String repository : ANDROID_REPOSITORIES) {
-            assertTrue(solo.waitForText(repository));
+        for (Repository repository : ANDROID_REPOSITORIES) {
+            assertTrue(solo.waitForText(repository.getDescription()));
         }
     }
 

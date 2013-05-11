@@ -24,4 +24,8 @@ public class Repository {
     public int hashCode() {
         return description != null ? description.hashCode() : 0;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

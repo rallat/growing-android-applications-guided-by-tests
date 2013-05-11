@@ -6,18 +6,17 @@ import com.github.frankiesardo.gaagbt.entity.Repository;
 
 import org.junit.Test;
 
+import static com.github.frankiesardo.gaagbt.boundary.mock.MockSearchRepositories.GITHUB;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class RepositoryConverterTest {
 
-    static final Repository GITHUB = new Repository("GitHub Android App");
-
-    final JsonConverter converter = new JsonConverter(new ObjectMapper(), new SimpleModule());
+    JsonConverter converter = new JsonConverter(new ObjectMapper(), new SimpleModule());
 
     @Test
     public void parseDataCorrectly() throws Exception {
-        Repository actual = converter.readValue(new ResourceReader("repository.json"), Repository.class);
+        Repository repository = converter.readValue(new ResourceReader("repository.json"), Repository.class);
 
-        assertThat(actual).isEqualTo(GITHUB);
+        assertThat(repository).isEqualTo(GITHUB);
     }
 }
