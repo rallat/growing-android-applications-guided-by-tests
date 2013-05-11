@@ -6,7 +6,7 @@ import com.github.frankiesardo.gaagbt.presentation.Presentation;
 import com.github.frankiesardo.gaagbt.request.SearchRepositoriesRequest;
 import com.github.frankiesardo.gaagbt.response.SearchRepositoriesResponse;
 
-public class SearchRepositoriesScenario implements Runnable {
+public class SearchRepositoriesScenario implements Scenario {
 
     private final Presentation<SearchRepositoriesResponse> presentation;
     private final GithubApi githubApi;
