@@ -10,7 +10,7 @@ import com.github.frankiesardo.gaagbt.response.SearchRepositoriesResponse;
 import com.github.frankiesardo.gaagbt.scenario.ScenarioDispatcher;
 import com.squareup.otto.Subscribe;
 
-public class SearchRepositoriesController {
+public class SearchRepositoriesController extends BaseController {
 
     private final ScenarioDispatcher dispatcher;
     private final CachedPresentation<SearchRepositoriesResponse> cachedPresentation;
@@ -34,12 +34,25 @@ public class SearchRepositoriesController {
 
     public void startNewSearch(String query) {
         updateTitle(query);
+        clearCurrentItems();
         dispatchSearch(query);
+    }
+
+    public void restorePreviousSearch(String query) {
+        updateTitle(query);
+        if (!cachedPresentation.hasCachedValue()) {
+            dispatchSearch(query);
+        }
     }
 
     private void updateTitle(String query) {
         actionBar.setTitle("\"" + query + "\"");
         actionBar.setSubtitle(R.string.search_results);
+    }
+
+    private void clearCurrentItems() {
+        adapter.clearItems();
+        cachedPresentation.clearCache();
     }
 
     private void dispatchSearch(String query) {

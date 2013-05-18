@@ -3,5 +3,7 @@
 
     <string name="app_name">Github</string>
     <string name="search_results">search results</string>
+    <string name="search_hint">Search repositories</string>
+    <string name="search_title">Search</string>
 
 </resources>

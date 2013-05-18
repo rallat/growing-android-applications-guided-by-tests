@@ -1,11 +1,10 @@
 package com.github.frankiesardo.gaagbt.framework.injection;
 
 import android.app.Application;
+import dagger.ObjectGraph;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import dagger.ObjectGraph;
 
 public class InjectingApplication extends Application {
 
@@ -25,6 +24,7 @@ public class InjectingApplication extends Application {
         List<Object> modules = new LinkedList<Object>();
         modules.add(new ActivityModule());
         modules.add(new PresentationModule());
+        modules.add(new ControllerModule());
         modules.add(new ScenarioModule());
         modules.add(new MockGithubApiModule());
         return modules;
