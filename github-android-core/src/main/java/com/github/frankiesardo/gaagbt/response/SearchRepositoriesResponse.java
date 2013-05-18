@@ -2,7 +2,7 @@ package com.github.frankiesardo.gaagbt.response;
 
 import com.github.frankiesardo.gaagbt.entity.Repositories;
 
-public class SearchRepositoriesResponse {
+public class SearchRepositoriesResponse implements Response<Repositories> {
 
     private Repositories repositories;
 
@@ -26,5 +26,10 @@ public class SearchRepositoriesResponse {
     @Override
     public int hashCode() {
         return repositories != null ? repositories.hashCode() : 0;
+    }
+
+    @Override
+    public Repositories getResult() {
+        return repositories;
     }
 }
