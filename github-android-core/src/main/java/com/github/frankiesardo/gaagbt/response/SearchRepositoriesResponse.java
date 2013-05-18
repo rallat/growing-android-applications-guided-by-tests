@@ -42,4 +42,8 @@ public class SearchRepositoriesResponse implements Response<Repositories> {
     public Request getRequest() {
         return request;
     }
+
+    public boolean isFrom(Request request) {
+        return this.request.equals(request);
+    }
 }

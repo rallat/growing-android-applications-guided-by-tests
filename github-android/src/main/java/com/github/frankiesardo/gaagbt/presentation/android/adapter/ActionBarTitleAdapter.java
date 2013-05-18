@@ -6,7 +6,16 @@ import com.github.frankiesardo.gaagbt.R;
 
 public class ActionBarTitleAdapter {
 
-    public void setSearchQuery(ActionBar actionBar, String query) {
+    private ActionBar actionBar;
+
+    public void setActionBar(ActionBar actionBar) {
+        this.actionBar = actionBar;
+    }
+
+    public void setSearchQuery(String query) {
+        if (actionBar == null) {
+            return;
+        }
         actionBar.setTitle("\"" + query + "\"");
         actionBar.setSubtitle(R.string.search_results);
     }
