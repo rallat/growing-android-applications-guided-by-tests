@@ -9,12 +9,13 @@
     android:targetSdkVersion="16" />
 
   <application
+    android:name=".framework.injection.InjectingApplication"
     android:allowBackup="true"
     android:debuggable="true"
     android:icon="@drawable/ic_launcher"
     android:label="@string/app_name"
     android:theme="@style/AppTheme">
-    <activity android:name=".SearchRepositoriesActivity">
+    <activity android:name=".presentation.android.ui.SearchRepositoriesActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
