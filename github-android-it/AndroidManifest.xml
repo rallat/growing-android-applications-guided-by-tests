@@ -12,7 +12,7 @@
 
   <instrumentation
     android:targetPackage="com.github.frankiesardo.gaagbt"
-    android:name="android.test.InstrumentationTestRunner" />
+    android:name="com.github.frankiesardo.gaagbt.presentation.android.ui.InjectingApplicationTestRunner" />
 
 </manifest>
 

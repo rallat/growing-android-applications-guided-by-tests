@@ -1,15 +1,16 @@
 package com.github.frankiesardo.gaagbt.boundary.retrofit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.frankiesardo.gaagbt.boundary.GithubApi;
 import com.github.frankiesardo.gaagbt.entity.Repositories;
-import com.github.frankiesardo.gaagbt.framework.converter.JsonConverter;
-import com.github.frankiesardo.gaagbt.framework.retrofit.RetrofitConverter;
+import com.github.frankiesardo.gaagbt.framework.injection.ApiLevel;
 
+import javax.inject.Inject;
+
+import org.junit.Before;
 import org.junit.Test;
 
-import retrofit.RestAdapter;
+import dagger.Module;
+import dagger.ObjectGraph;
 
 import static com.github.frankiesardo.gaagbt.boundary.mock.MockSearchRepositories.ANDROID_KEYWORD;
 import static com.github.frankiesardo.gaagbt.boundary.mock.MockSearchRepositories.ANDROID_REPOSITORIES;
@@ -17,15 +18,22 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class GithubApiTest {
 
+    @Inject
+    GithubApi githubApi;
+
+    @Module(entryPoints = GithubApiTest.class)
+    static class TestModule {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        ObjectGraph.create(new TestModule(), ApiLevel.DEBUG.module()).inject(this);
+    }
+
     @Test
     public void searchRepositories() throws Exception {
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setServer(RetrofitGithubApi.ENDPOINT_URL)
-                .setConverter(new RetrofitConverter(new JsonConverter(new ObjectMapper(), new SimpleModule())))
-                .setDebug(true)
-                .build();
-        GithubApi apiService = restAdapter.create(RetrofitGithubApi.class);
-        Repositories repositories = apiService.searchRepositories(ANDROID_KEYWORD);
+        Repositories repositories = githubApi.searchRepositories(ANDROID_KEYWORD);
         assertThat(repositories).contains(ANDROID_REPOSITORIES.toArray());
     }
 }
+
