@@ -26,7 +26,11 @@ public class InjectingApplication extends Application {
         modules.add(new PresentationModule());
         modules.add(new ControllerModule());
         modules.add(new ScenarioModule());
-        modules.add(new MockGithubApiModule());
+        modules.add(getApiLevel().module());
         return modules;
+    }
+
+    protected ApiLevel getApiLevel() {
+        return ApiLevel.PRODUCTION;
     }
 }

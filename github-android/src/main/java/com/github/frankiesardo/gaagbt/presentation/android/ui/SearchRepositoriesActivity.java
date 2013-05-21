@@ -68,6 +68,14 @@ public class SearchRepositoriesActivity extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing()) {
+            controller.dispose();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search, menu);
@@ -80,14 +88,6 @@ public class SearchRepositoriesActivity extends BaseActivity {
                 searchManager.getSearchableInfo(getComponentName()));
 
         return true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (isFinishing()) {
-            controller.dispose();
-        }
     }
 }
 
