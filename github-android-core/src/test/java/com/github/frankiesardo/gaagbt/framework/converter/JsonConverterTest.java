@@ -6,15 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.frankiesardo.gaagbt.entity.Repositories;
 import com.github.frankiesardo.gaagbt.entity.Repository;
-
-import java.io.Reader;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.io.Reader;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.any;
@@ -53,6 +52,17 @@ public class JsonConverterTest {
         when(objectMapper.readValue(any(Reader.class), eq(Object.class))).thenReturn(expected);
 
         Object actual = jsonConverter.readValue(mock(Reader.class), Object.class);
+
+        assertThat(actual).isSameAs(expected);
+    }
+
+    @Test
+    public void delegateWriteToObjectMapper() throws Exception {
+        String expected = "expected";
+        Object value = new Object();
+        when(objectMapper.writeValueAsString(value)).thenReturn(expected);
+
+        String actual = jsonConverter.writeValueAsString(value);
 
         assertThat(actual).isSameAs(expected);
     }

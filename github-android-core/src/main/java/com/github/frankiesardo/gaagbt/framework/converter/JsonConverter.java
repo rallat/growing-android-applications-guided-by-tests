@@ -1,5 +1,6 @@
 package com.github.frankiesardo.gaagbt.framework.converter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -29,6 +30,14 @@ public class JsonConverter {
         try {
             return objectMapper.readValue(reader, valueType);
         } catch (IOException e) {
+            throw new JsonConverterException(e);
+        }
+    }
+
+    public String writeValueAsString(Object value) {
+        try {
+            return objectMapper.writeValueAsString(value);
+        } catch (JsonProcessingException e) {
             throw new JsonConverterException(e);
         }
     }
