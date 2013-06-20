@@ -1,0 +1,11 @@
+apply plugin: "java"
+
+dependencies {
+    compile project(':github-android-core')
+
+    testCompile "org.easytesting:fest-assert:1.4"
+    testCompile "junit:junit:4.10"
+    testCompile "org.mockito:mockito-core:1.9.5"
+
+
+}

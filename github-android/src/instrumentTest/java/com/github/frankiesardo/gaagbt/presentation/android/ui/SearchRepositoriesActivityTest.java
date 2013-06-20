@@ -1,7 +1,6 @@
 package com.github.frankiesardo.gaagbt.presentation.android.ui;
 
 import android.test.ActivityInstrumentationTestCase2;
-
 import com.github.frankiesardo.gaagbt.R;
 import com.github.frankiesardo.gaagbt.entity.Repository;
 import com.jayway.android.robotium.solo.Solo;

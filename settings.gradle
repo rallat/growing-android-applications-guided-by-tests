@@ -1,0 +1,3 @@
+include "github-android"
+include "github-android-core"
+include "github-android-smoke"

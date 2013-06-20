@@ -1,0 +1,25 @@
+subprojects {
+
+    apply plugin: 'findbugs'
+    apply plugin: 'pmd'
+    apply plugin: 'checkstyle'
+
+    findbugs {
+        ignoreFailures = true
+    }
+
+    pmd {
+        ignoreFailures = true
+    }
+
+    checkstyle {
+        ignoreFailures = true
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    version = '1.0'
+}
