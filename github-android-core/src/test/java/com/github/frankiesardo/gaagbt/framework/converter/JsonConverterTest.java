@@ -56,4 +56,15 @@ public class JsonConverterTest {
 
         assertThat(actual).isSameAs(expected);
     }
+
+    @Test
+    public void delegateWriteToObjectMapper() throws Exception {
+        String expected = "expected";
+        Object value = new Object();
+        when(objectMapper.writeValueAsString(value)).thenReturn(expected);
+
+        String actual = jsonConverter.writeValueAsString(value);
+
+        assertThat(actual).isSameAs(expected);
+    }
 }
