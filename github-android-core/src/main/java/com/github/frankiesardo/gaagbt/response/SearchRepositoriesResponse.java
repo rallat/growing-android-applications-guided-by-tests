@@ -1,13 +1,18 @@
 package com.github.frankiesardo.gaagbt.response;
 
 import com.github.frankiesardo.gaagbt.entity.Repositories;
+import com.github.frankiesardo.gaagbt.request.Request;
+import com.github.frankiesardo.gaagbt.request.SearchRepositoriesRequest;
 
-public class SearchRepositoriesResponse {
+public class SearchRepositoriesResponse implements Response<Repositories> {
 
-    private Repositories repositories;
+    private final Repositories repositories;
+    private final SearchRepositoriesRequest request;
 
-    public SearchRepositoriesResponse(Repositories repositories) {
+    public SearchRepositoriesResponse(Repositories repositories, SearchRepositoriesRequest request) {
         this.repositories = repositories;
+        this.request = request;
+
     }
 
     @Override
@@ -26,5 +31,15 @@ public class SearchRepositoriesResponse {
     @Override
     public int hashCode() {
         return repositories != null ? repositories.hashCode() : 0;
+    }
+
+    @Override
+    public Repositories getResult() {
+        return repositories;
+    }
+
+    @Override
+    public Request getRequest() {
+        return request;
     }
 }

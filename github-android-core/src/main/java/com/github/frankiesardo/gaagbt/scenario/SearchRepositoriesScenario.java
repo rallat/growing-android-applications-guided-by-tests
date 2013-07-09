@@ -22,7 +22,7 @@ public class SearchRepositoriesScenario implements Scenario {
     public void run() {
         String keyword = request.getKeyword();
         Repositories repositories = githubApi.searchRepositories(keyword);
-        SearchRepositoriesResponse response = new SearchRepositoriesResponse(repositories);
+        SearchRepositoriesResponse response = new SearchRepositoriesResponse(repositories, request);
         presentation.present(response);
     }
 }

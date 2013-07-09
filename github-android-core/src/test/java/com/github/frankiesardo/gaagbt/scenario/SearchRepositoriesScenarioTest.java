@@ -26,8 +26,9 @@ public class SearchRepositoriesScenarioTest {
 
     @Test
     public void notifyThePresentationWIthTheRetrievedRepositories() throws Exception {
-        SearchRepositoriesScenario scenario = new SearchRepositoriesScenario(presentation, githubApi, new SearchRepositoriesRequest(ANDROID_KEYWORD));
-        SearchRepositoriesResponse response = new SearchRepositoriesResponse(ANDROID_REPOSITORIES);
+        SearchRepositoriesRequest request = new SearchRepositoriesRequest(ANDROID_KEYWORD);
+        SearchRepositoriesScenario scenario = new SearchRepositoriesScenario(presentation, githubApi, request);
+        SearchRepositoriesResponse response = new SearchRepositoriesResponse(ANDROID_REPOSITORIES, request);
         when(githubApi.searchRepositories(ANDROID_KEYWORD)).thenReturn(ANDROID_REPOSITORIES);
 
         scenario.run();
